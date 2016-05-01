@@ -1,39 +1,31 @@
-// By Chris Coyier & tweaked by Mathias Bynens
+// Ported from a jquery version Chris Coyier & tweaked by Mathias Bynens
+// https://css-tricks.com/fluid-width-youtube-videos/
 
-$(function() {
+window.addEventListener('load', function() {
+  var fluidEl = document.querySelector(".content");
+  var allVideos = Array.prototype.slice.call(fluidEl.querySelectorAll("iframe[src^='https://www.youtube.com']"));
 
-  // Find all YouTube videos
-  var $allVideos = $("iframe[src^='https://www.youtube.com']"),
-
-      // The element that is fluid width
-      $fluidEl = $(".content");
-
-  // Figure out and save aspect ratio for each video
-  $allVideos.each(function() {
-
-    $(this)
-      .data('aspectRatio', this.height / this.width)
-
+  allVideos.forEach(function(e) {
+    e.setAttribute("data-aspectRatio", e.height / e.width);
   });
 
-  // When the window is resized
-  // (You'll probably want to debounce this)
+  function getElementContentWidth(element) {
+    var styles = window.getComputedStyle(element);
+    var padding = parseFloat(styles.paddingLeft) +
+                  parseFloat(styles.paddingRight);
+    return element.clientWidth - padding;
+  }
   var setSizes = function() {
-    var newWidth = $fluidEl.width();
-
-    // Resize all videos according to their own aspect ratio
-    $allVideos.each(function() {
-
-      var $el = $(this);
-      $el
-        .width(newWidth)
-        .height(newWidth * $el.data('aspectRatio'));
-
+    var newWidth = getElementContentWidth(fluidEl);
+    allVideos.forEach(function(e) {
+      e.width = newWidth;
+      e.height = newWidth * e.getAttribute('data-aspectRatio');
     });
 
-    // Kick off one resize to fix all videos on page load
-  }
-  $(window).resize(setSizes);
-  $fluidEl.get()[0].addEventListener('mdl-componentupgraded', setSizes)
+  };
+  window.addEventListener("resize", setSizes);
+  // Kick off one resize to fix all videos on page load
+  setSizes()
+  // fluidEl.addEventListener('mdl-componentupgraded', setSizes)
 
 });
