@@ -60,3 +60,17 @@
     right: 16px;
     top: 16px;
 }
+
+.index-card-square.mdl-card {
+    width: 320px;
+    height: 320px;
+}
+.index-card-square > .mdl-card__title {
+    color: #fff;
+    background: #46B6AC;
+}
+
+.index-max-width {
+    max-width: 900px;
+    margin: auto;
+}
