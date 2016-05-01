@@ -1,9 +1,15 @@
-name: "Ergonomics"
+name: "Ergonomics Guides"
 description: "Notes on ergonomics for heavy computer users"
-#signature: "Yours truly, Grizzly Bear"
+signature: ""
 highlighter: rouge
 permalink: pretty
 markdown: kramdown
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: post
 # enables "edit" link
 github:
   # example for a user or organization site

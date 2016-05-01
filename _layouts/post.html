@@ -1,7 +1,27 @@
 ---
-layout: default
+layout: base
 ---
 
-<div class="post">
-  <div class="content">{{ content }}</div>
-</div>
+<div class="post-ribbon"></div>
+<main class="post-main mdl-layout__content">
+    <div class="post-container mdl-grid">
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+        <div class="post-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+
+            <div class="post-crumbs">
+                <a href="/">{{site.name}}</a>
+            </div>
+
+            <h2 class="post--title">{{ page.title }}</h2>
+            <p class="post--description">
+                {{ page.description }}
+            </p>
+            <small class="author">{{page.author}}</small>
+
+            <div class="post">
+                <div class="post--body">{{ content }}</div>
+            </div>
+            <a href="http://prose.io/#{{ site.github.repo }}/edit/{{ site.github.branch }}/{{ page.path }}" target="_blank" class="mdl-button--post-edit mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"><i class="material-icons">edit</i></a>
+        </div>
+    </div>
+</main>
